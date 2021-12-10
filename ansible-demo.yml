@@ -1,0 +1,65 @@
+---
+- name: Install nginx
+  hosts: localhost
+  remote_user: root
+
+#установка nginx
+  tasks:
+  - name: Install nginx
+    shell:
+      cmd: apt install -y nginx
+     # notify: Start nginx
+#установка Python 3
+  - name: Install Python 3
+
+    shell:
+      cmd: apt install -y python3
+      
+      #запуск nginx
+  - name: start nginx
+    service: name=nginx state=started
+
+#перезапуск nginx
+  - name: restart nginx
+    service: name=nginx state=restarted
+    #Установка Elastik
+  - name: Install elasticsearch
+    shell:
+      cmd: apt install -y elasticsearch
+
+  - name: start elasticsearch
+    service: name=elasticsearch state=started
+
+  - name: restart elasticsearch
+    service: name=elasticsearch state=restarted
+
+#проверка работы
+  - name: input  elasticsearch
+    shell:
+      cmd: curl -X GET "localhost:9200"
+
+#Установка kibana
+  - name: Install kibana
+    shell:
+      cmd: apt install -y kiban
+
+#установка tmux
+  - name: install tmux
+    package:
+      name: tmux
+      state: present
+
+#создание архива log
+  - name: create an archive
+    archive:
+      path: /var/log
+      dest: /tmp/logs.tar.gz
+      format: gz
+ 
+ #установка logstash
+  - name: Install logstash
+    shell:
+      cmd: apt install -y logstash
+
+
+     
