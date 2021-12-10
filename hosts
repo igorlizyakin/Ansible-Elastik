@@ -1,0 +1,9 @@
+[elk-master-nodes]
+elk-master01
+elk-master02
+elk-master03
+
+[elk-data-nodes]
+elk-data01
+elk-data02
+elk-data03
